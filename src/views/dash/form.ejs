@@ -1,0 +1,66 @@
+<%- include("../header.ejs") %>
+<%- include("../navbar.ejs") %>
+
+<script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
+<body class="bg-gray-900">
+    <div class="flex flex-col items-center justify-center mt-20">
+        <h1 class="mb-10 text-5xl text-[#C8C8C8]"><%= data.title %></h1>
+        <div class="bg-black/30 max-w-md mx-auto shadow-md rounded-xl px-8 pt-6 pb-8 mb-4 flex flex-col w-2/3 min-w-fit">
+            <div class="mb-4">
+                <% if(data.page === "edit") {%>
+                    <input type="hidden" id="siteId" value="<%= data.account.siteId %>">
+                <%}%>
+                <label class="block text-white-color text-sm font-bold mb-2" for="site">
+                    Site
+                </label>
+                <input class="shadow appearance-none border rounded-xl w-full py-2 px-3 text-white-color bg-gray-900" id="site" name="site" type="text" placeholder="Site" value="<% if(data.account) if (data.account.site)%><%= data.account.site %>">
+            </div>
+            <div class="mb-4">
+                <label class="block text-white-color text-sm font-bold mb-2" for="username">
+                    Username
+                </label>
+                <input class="shadow appearance-none border rounded-xl w-full py-2 px-3 text-white-color bg-gray-900" id="username" name="username" type="text" placeholder="Username" value="<% if (data.account) {%><% if (data.account.username) {%><%= data.account.username %><%}%><%}%>">
+            </div>
+            <div class="mb-4">
+                <label class="block text-white-color text-sm font-bold mb-2 " for="password">
+                    Password
+                </label>
+                <input class="shadow appearance-none border border-red rounded-xl w-full py-2 px-3 text-white-color bg-gray-900 mb-3" id="password" name="password" type="password" placeholder="******************">
+            </div>
+            <div class="flex items-center justify-center">
+                <button class="bg-gray-900 text-white-color font-bold py-2 px-4 rounded-xl transition ease-in-out duration-700 hover:scale-110 hover:bg-white-color hover:text-gray-900 w-2/3" type="submit" id="add" data-modal-toggle="popup-modal">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Product Modal -->
+    <div class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full" id="popup-modal">
+        <div class="relative px-4 w-full max-w-md h-full md:h-auto">
+        <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+            <!-- Modal header -->
+                <div class="flex justify-end p-2">
+                    <button type="button" class="text-gray-500 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-6 pt-0 text-center">
+                    <svg class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to add this password?</h3>
+                    <input type="hidden" id="siteIdHidden" name="siteId">
+                    <input type="hidden" id="siteHidden" name="site">
+                    <input type="hidden" id="usernameHidden" name="username">
+                    <input type="hidden" id="passwordHidden" name="password">
+
+                    <button data-modal-toggle="popup-modal" class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2" type="submit" id="formSubmit" data-method="<%= data.page %>">
+                    Yes
+                    </button>
+                    <button data-modal-toggle="popup-modal" class="text-white-color bg-red hover:bg-red-100 focus:ring-4 focus:ring-red-300 rounded-lg text-sm font-medium px-5 py-2.5 hover:text-red-900 focus:z-10 dark:bg-red-800 dark:text-white-color  dark:hover:text-white-color dark:hover:bg-red-600" type="button">No, cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
